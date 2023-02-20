@@ -10,7 +10,7 @@ def audiototext(filepath):
     extract_info_from_wav(text)
 
 def extract_info_from_wav(text):
-
+    #Metodo que se encarga de filtrar el fichero habría que mejorar como obtener los datos importantes. 
     # Filtrar nombre
     match = re.search(r'(?i)soy\s*([A-Z][a-z]+)', text)
     if match:
