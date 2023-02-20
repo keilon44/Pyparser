@@ -1,0 +1,5 @@
+-- Requirements for the service to work.
+
+pip install pyAudio
+pip install SpeechRecognition
+pip install pyodbc
