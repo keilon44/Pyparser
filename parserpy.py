@@ -5,11 +5,19 @@ import soundfile
 import speech_recognition as sr
 import connection
 def audiototext(filepath):
+    #Cambio de formato del fichero Wav para que pueda ser leído por el recognizer
+    data, samplerate = soundfile.read('cedillo.wav')
+    soundfile.write('cedillo2.wav', data, samplerate, subtype='PCM_16')
+
+    #Creamos la instancia del recognizer
     r = sr.Recognizer()
+
     with sr.AudioFile(filepath) as source:
         audio = r.record(source)
     # Reconocimiento de texto
     text = r.recognize_google(audio, language = "es-ES")
+
+    #Una vez llamado el texto hay que filtrarlo para ver si se pueden obtener el da
     extract_info_from_wav(text)
 
 def extract_info_from_wav(text):
@@ -17,7 +25,7 @@ def extract_info_from_wav(text):
     #Metodo que se encarga de filtrar el fichero habría que mejorar como obtener los datos importantes.
     # Filtrar nombre.
 
-    match = re.search(r'(?i)soy\s*([A-Z][a-z]+)', text)
+    match = re.search(r'(?i)soy\s*([A-Z][a-z]+)', text) #Filtra por la palabra "Soy"
     if match:
         name = match.group(1)
         print("Nombre: " + name)
